@@ -8,6 +8,7 @@ class RuuviTag extends EventEmitter {
   constructor(data) {
     super();
     this.id = data.id;
+    this.address = data.address;
   }
 
 }
@@ -37,6 +38,7 @@ class Ruuvi extends EventEmitter {
         if (!this._tagLookup[peripheral.id]) {
           newRuuviTag = new RuuviTag({
             id: peripheral.id,
+            address: peripheral.address
           });
           registerTag(newRuuviTag);
           this.emit('found', newRuuviTag);
@@ -53,6 +55,7 @@ class Ruuvi extends EventEmitter {
             if (!this._tagLookup[peripheral.id]) {
               newRuuviTag = new RuuviTag({
                 id: peripheral.id,
+                address: peripheral.address
               });
               registerTag(newRuuviTag);
               this.emit('found', newRuuviTag);
