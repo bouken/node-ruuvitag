@@ -74,7 +74,7 @@ class Ruuvi extends EventEmitter {
           return ruuviTag.emit(
             'updated',
             Object.assign(
-              { dataFormat: 3, rssi: peripheral.rssi },
+              { address: peripheral.address, dataFormat: 3, rssi: peripheral.rssi },
               parser.parseManufacturerData(peripheral.advertisement.manufacturerData))
           );
         }
@@ -87,6 +87,7 @@ class Ruuvi extends EventEmitter {
         const parsed = url ? parser.parseUrl(url) : undefined;
         if (parsed && !(parsed instanceof Error)) {
           ruuviTag.emit('updated', {
+            address: peripheral.address,
             url: url,
             dataFormat: parsed.dataFormat,
             rssi: peripheral.rssi,
